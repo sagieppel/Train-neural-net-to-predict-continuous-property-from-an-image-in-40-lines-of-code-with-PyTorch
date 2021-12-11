@@ -33,7 +33,7 @@ AverageLoss=np.zeros([50]) # Save average loss for display
 for itr in range(500001): # Training loop
    images,GTFillLevel=LoadBatch() # Load taining batch
    images=torch.autograd.Variable(images,requires_grad=False).to(device) # Load image
-   GTFillLevel = torch.autograd.Variable(GTFillLevel, requires_grad=False).to(device) # Load annotation
+   GTFillLevel = torch.autograd.Variable(GTFillLevel, requires_grad=False).to(device) # Load Ground truth fill level
    PredLevel=Net(images) # make prediction
    Net.zero_grad()
    Loss=torch.abs(PredLevel-GTFillLevel).mean()
