@@ -7,11 +7,12 @@ width=height=900 # image width and height
 batchSize=1
 #---------------------Read image ---------------------------------------------------------
 def ReadRandomImage(): # First lets load random image and  the corresponding annotation
-    FillLevel=np.random.random()
-    Img=np.zeros([900,900,3],np.uint8)
-    Img[0:int(FillLevel*900),:]=255
-    transformImg=tf.Compose([tf.ToPILImage(),tf.Resize((height,width)),tf.ToTensor(),tf.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
-    Img=transformImg(Img)
+    FillLevel=np.random.random() # Set random fill level
+    Img=np.zeros([900,900,3],np.uint8) # Create black image 
+    Img[0:int(FillLevel*900),:]=255 # Fill the image with white up to FillLevel
+    
+    transformImg=tf.Compose([tf.ToPILImage(),tf.Resize((height,width)),tf.ToTensor(),tf.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))]) 
+    Img=transformImg(Img) # Transform to pytorch
     return Img,FillLevel
 #--------------Load batch of images-----------------------------------------------------
 def LoadBatch(): # Load batch of images
@@ -24,7 +25,7 @@ def LoadBatch(): # Load batch of images
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 Net = torchvision.models.resnet18(pretrained=True) # Load net
-Net.fc = torch.nn.Linear(in_features=512, out_features=1, bias=True)
+Net.fc = torch.nn.Linear(in_features=512, out_features=1, bias=True) # Change final layer to predict one value
 Net = Net.to(device)
 optimizer = torch.optim.Adam(params=Net.parameters(),lr=Learning_Rate) # Create adam optimizer
 #----------------Train--------------------------------------------------------------------------
