@@ -10,7 +10,7 @@ def ReadRandomImage(): # First lets load random image and  the corresponding ann
     FillLevel=np.random.random()
     Img=np.zeros([900,900,3],np.uint8)
     Img[0:int(FillLevel*900),:]=255
-    transformImg = tf.Compose([tf.ToPILImage(), tf.ToTensor()])
+    transformImg=tf.Compose([tf.ToPILImage(),tf.Resize((height,width)),tf.ToTensor(),tf.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
     Img=transformImg(Img)
     return Img,FillLevel
 #--------------Load batch of images-----------------------------------------------------
