@@ -33,5 +33,5 @@ Net.load_state_dict(torch.load(modelPath)) # Load trained model
 Img = torch.autograd.Variable(Img, requires_grad=False).to(device).unsqueeze(0) # Convert to pytorch
 with torch.no_grad():
     Prd = Net(Img)  # Run net
-print("Predicte fill level", Prd.data.cpu().numpy())
+print("Predicted fill level", Prd.data.cpu().numpy())
 print("Real fill level", FillLevel)
