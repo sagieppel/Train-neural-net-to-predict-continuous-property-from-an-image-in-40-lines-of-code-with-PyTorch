@@ -22,8 +22,7 @@ def LoadBatch(): # Load batch of images
         images[i],FillLevel[i]=ReadRandomImage()
     return images,FillLevel
 #--------------Load and set net and optimizer-------------------------------------
-device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
-device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu') # Set device GPU or CPU where the training will take place
 Net = torchvision.models.resnet18(pretrained=True) # Load net
 Net.fc = torch.nn.Linear(in_features=512, out_features=1, bias=True) # Change final layer to predict one value
 Net = Net.to(device)
