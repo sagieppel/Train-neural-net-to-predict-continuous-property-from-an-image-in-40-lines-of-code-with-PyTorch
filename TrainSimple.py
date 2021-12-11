@@ -40,6 +40,6 @@ for itr in range(500001): # Training loop
    optimizer.step() # Apply gradient descent change to weight
    AverageLoss[itr%50]=Loss.data.cpu().numpy() # Save loss average
    print(itr,") Loss=",Loss.data.cpu().numpy(),'AverageLoss',AverageLoss.mean()) # Display loss
-   if itr % 1000 == 0: # Save model
+   if itr % 200 == 0: # Save model
         print("Saving Model" +str(itr) + ".torch") #Save model weight
         torch.save(Net.state_dict(),   str(itr) + ".torch")
