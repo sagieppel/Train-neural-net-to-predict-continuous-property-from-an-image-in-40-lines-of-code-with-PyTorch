@@ -6,7 +6,7 @@ Learning_Rate=1e-5
 width=height=900 # image width and height
 batchSize=1
 #---------------------Create training image ---------------------------------------------------------
-def ReadRandomImage(): # First lets load random image and  the corresponding annotation
+def ReadRandomImage(): 
     FillLevel=np.random.random() # Set random fill level
     Img=np.zeros([900,900,3],np.uint8) # Create black image 
     Img[0:int(FillLevel*900),:]=255 # Fill the image with white up to FillLevel
